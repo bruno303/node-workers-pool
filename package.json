@@ -1,0 +1,21 @@
+{
+  "name": "node-workers-pool",
+  "version": "1.0.1",
+  "description": "Easy way to manage a pool of worker threads.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --experimental-worker index.js",
+    "startDev": "nodemon --experimental-worker index.js"
+  },
+  "keywords": [
+    "thread",
+    "pool", 
+    "workers"
+  ],
+  "author": "Bruno Oliveira",
+  "license": "MIT",
+  "dependencies": { },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
