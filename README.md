@@ -1,10 +1,6 @@
 # node-workers-pool
 Easy way to manage a pool of worker threads.
 
-## Introduction
-
-Passo a passo para rodar a aplicação:
-
 ### Prerequisites
 
 * [NodeJs](https://nodejs.org/en/)
