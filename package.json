@@ -1,6 +1,6 @@
 {
   "name": "node-workers-pool",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "Easy way to manage a pool of worker threads.",
   "main": "index.js",
   "scripts": {
@@ -9,14 +9,32 @@
   "keywords": [
     "thread",
     "pool",
+    "worker_threads",
     "workers",
-    "threads"
+    "threads",
+    "worker",
+    "async",
+    "cpu-bound",
+    "parallelism",
+    "parallel",
+    "process",
+    "worker_thread",
+    "queue",
+    "task",
+    "threadpool"
   ],
-  "author": "Bruno Oliveira",
+  "author": {
+    "name": "Bruno Oliveira",
+    "email": "brunooliveira812@gmail.com"
+  },
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "express": "^4.16.4",
     "nodemon": "^1.18.9"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/bruno303/node-workers-pool"
   }
 }
