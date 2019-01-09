@@ -1,6 +1,8 @@
 # node-workers-pool
 Easy way to manage a pool of worker threads.
 
+Use the **--experimental-worker** flag to run correctly, since this resource still experimental in NodeJs.
+
 ## Introduction
 
 With this package you can:
