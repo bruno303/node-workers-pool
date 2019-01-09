@@ -10,7 +10,8 @@ function Pool(opts) {
     this.max = this.opts.max || require('os').cpus().length;
     this.queueMax = this.opts.queueMax || 10;
 
-    let workers = new Workers();
+    let queue = new Queue({ max: this.queueMax });
+    let workers = new Workers(queue);
 
     this.getSize = function() {
         return workers.getSize();

@@ -4,18 +4,19 @@
   "description": "Easy way to manage a pool of worker threads.",
   "main": "index.js",
   "scripts": {
-    "start": "node --experimental-worker index.js",
-    "startDev": "nodemon --experimental-worker index.js"
+    "test": "nodemon --experimental-worker ./test/server.js"
   },
   "keywords": [
     "thread",
-    "pool", 
-    "workers"
+    "pool",
+    "workers",
+    "threads"
   ],
   "author": "Bruno Oliveira",
   "license": "MIT",
-  "dependencies": { },
+  "dependencies": {},
   "devDependencies": {
+    "express": "^4.16.4",
     "nodemon": "^1.18.9"
   }
 }
