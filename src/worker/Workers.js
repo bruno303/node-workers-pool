@@ -2,8 +2,9 @@
 
 const Worker = require('./Worker.js');
 
-function Workers(methodsPath) {
-    this.methodsPath = methodsPath;
+function Workers(queue) {
+
+    this.queue = queue;
 
     /* Array to keep the threads */
     let workers = [];
@@ -21,8 +22,8 @@ function Workers(methodsPath) {
     }
 
     /* Create a new Worker Thread, insert into array and start the execution */
-    this.createWorker = function(method, args, callback, start = false) {
-        let worker = new Worker(exitCode => {
+    this.createWorker = function(method, args, callback) {
+        let worker = new Worker(this.queue, exitCode => {
             this.remove(worker);
         });
 
@@ -30,9 +31,7 @@ function Workers(methodsPath) {
         workers.push(worker);
 
         /* Start processing */
-        if (start) {
-            worker.run(method, args, callback);
-        }
+        worker.run(method, args, callback);
     }
 
     /* Search for a free worker thread */
@@ -50,10 +49,15 @@ function Workers(methodsPath) {
 
     /* Terminate all threads and clean the array */
     this.terminateAll = function() {
-        for (let i = 0; i < workers.length; i++) {
-            workers[i].terminate();
+        try {
+            for (let i = 0; i < workers.length; i++) {
+                workers[i].terminate();
+            }
+            workers.splice(0, workers.length);
         }
-        workers.splice(0, workers.length);
+        catch(err) {
+            throw err;
+        }
     }
 }
 
