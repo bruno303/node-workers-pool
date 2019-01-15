@@ -107,6 +107,9 @@ const pool = new Pool(); // without opts
 ```
 
 ### Tests
+
+*Obs: Express processes identical requests one after another. Performing the same get from the same host with the same parameters can make it not run asynchronously, due to the express.*
+
 Run the code below to test:
 ```
 npm test
@@ -136,8 +139,8 @@ http://127.0.0.1:3000/asyncfibo/5
 ```
 
 ### Notes
-* Case the pool and queue were full, an error 'full' will be thrown.
-* The workers will be allocated as needed, so a pool with max 10 workers will only have the 10 workers when 10 methods are allocated.
+* Case the pool and queue are full, an error 'full' will be thrown.
+* The workers will be allocated as needed, so just create a pool will not create all workers at same time.
 
 Click [here](https://nodejs.org/docs/latest-v11.x/api/worker_threads.html) to read more about **worker_threads**.
 

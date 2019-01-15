@@ -1,6 +1,6 @@
 {
   "name": "node-workers-pool",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Easy way to manage a pool of worker threads.",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "nodemon": "^1.18.9"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/bruno303/node-workers-pool"
+    "type": "git",
+    "url": "https://github.com/bruno303/node-workers-pool"
   }
 }
