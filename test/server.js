@@ -21,13 +21,19 @@ function funcSum(num) {
 /* Function example 2 */
 const funcFibonacci = require('./fibonacci.js');
 
+app.use((req, res, next) => {
+    log.registerLogExec('Started ' + 
+        (req.originalUrl.split('/')[1].indexOf('async') !== -1 ? 'async' : 'sync') +
+        ' exec.');
+    next();
+});
+
 /** 
  * Async Sum Route
  * Test: http://127.0.0.1:3000/asyncsum/1000000000
  */
 app.route('/asyncsum/:num')
 .get((req, res) => {
-    log.registerLogExec('Started async exec.');
     const now = new Date();
 
     try {
@@ -35,7 +41,8 @@ app.route('/asyncsum/:num')
         pool.enqueue(funcSum, Number.parseInt(req.params.num, 10))
         .then(result => {
             res.status(200).send(`Executed in ${(new Date() - now) / 1000} sec(s). Result: ${JSON.stringify(result)}`);
-            pool.finishPool().then(() => log.registerLogExec('Pool Finalizado!'));
+            // pool.finishPool().then(() => log.registerLogExec('Pool finished!'));
+            log.registerLogExec('Request finished.');
         })
         .catch(err => {
             res.status(500).send(`Error: ${JSON.stringify(err)}`);
@@ -52,7 +59,6 @@ app.route('/asyncsum/:num')
  */
 app.route('/asyncfibo/:num')
 .get((req, res) => {
-    log.registerLogExec('Started async exec.');
     const now = new Date();
 
     try {
@@ -73,13 +79,12 @@ app.route('/asyncfibo/:num')
 /* Async Multip Route */
 app.route('/asyncmultip/:num/:num2/:num3')
 .get((req, res) => {
-    log.registerLogExec('Started async exec.');
     const now = new Date();
 
     try {
         /* Send to pool queue */
         pool.enqueue(
-            (num1, num2) => num1 * num2 * num3, // Func
+            (num1, num2, num3) => num1 * num2 * num3, // Func
             Number.parseInt(req.params.num, 10), Number.parseInt(req.params.num2, 10), Number.parseInt(req.params.num3, 10) // Params
         ).then(result => {
             res.status(200).send(`Executed in ${(new Date() - now) / 1000} sec(s). Result: ${JSON.stringify(result)}`);
@@ -99,7 +104,6 @@ app.route('/asyncmultip/:num/:num2/:num3')
  */
 app.route('/syncsum/:num')
 .get((req, res) => {
-    log.registerLogExec('Started sync exec.');
     const now = new Date();
 
     /* Run in the Event Loop thread */
@@ -113,7 +117,6 @@ app.route('/syncsum/:num')
  */
 app.route('/syncfibo/:num')
 .get((req, res) => {
-    log.registerLogExec('Started sync exec.');
     const now = new Date();
 
     /* Run in the Event Loop thread */
@@ -127,7 +130,6 @@ app.route('/syncfibo/:num')
  */
 app.route('/syncmultip/:num/:num2/:num3')
 .get((req, res) => {
-    log.registerLogExec('Started sync exec.');
     const now = new Date();
     const funcMultip = (num1, num2, num3) => num1 * num2 * num3;
 
