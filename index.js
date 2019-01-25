@@ -1,1 +1,1 @@
-module.exports = require('./src/Pool.js');
+module.exports = require("./src/Pool.js");
