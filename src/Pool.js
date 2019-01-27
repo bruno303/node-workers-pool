@@ -20,8 +20,6 @@ function Pool (opts) {
   this.enqueue = function (method, ...args) {
     return new Promise((resolve, reject) => {
       try {
-        console.log(`Size of the pool: ${this.getSize()}`);
-
         let workerFree = workers.getFreeWorker();
         if (workerFree !== undefined) {
           workerFree.run(method.toString(), args, (err, result) => {

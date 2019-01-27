@@ -22,7 +22,7 @@ function funcSum (num) {
 const funcFibonacci = require("./fibonacci.js");
 
 app.use((req, res, next) => {
-  // log.registerLogExec(`req.connection.timeout = ${req.connection.timeout}`);
+  req.connection.timeout = 1000 * 60 * 10;
   log.registerLogExec("Started " +
         (req.originalUrl.split("/")[1].indexOf("async") !== -1 ? "async" : "sync") +
         " exec.");

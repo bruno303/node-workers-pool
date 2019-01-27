@@ -20,6 +20,7 @@ With this package you can:
 ### DEV - Prerequisites
 * [express](https://expressjs.com/)
 * [nodemon](https://nodemon.io/)
+* [eslint](https://eslint.org/)
 
 ### Examples
 
