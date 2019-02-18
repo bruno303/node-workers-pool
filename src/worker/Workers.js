@@ -57,6 +57,18 @@ function Workers (queue) {
       throw err;
     }
   };
+
+  this.getState = function () {
+    const state = [];
+
+    if (this.getSize() > 0) {
+      workers.forEach(worker => {
+        state.push(worker.getState());
+      });
+    }
+
+    return state;
+  };
 }
 
 module.exports = Workers;

@@ -33,6 +33,10 @@ function Queue (opts) {
       _queue.splice(0, _queue.length);
     }
   };
+
+  this.getSize = function () {
+    return _queue.length;
+  };
 }
 
 module.exports = Queue;

@@ -76,8 +76,33 @@ function Pool (opts) {
       }
     });
   };
+
+  this.getState = function () {
+    const workersState = workers.getState();
+    const hasFreeWorker = workersState.length > 0 ? workersState.filter(value => !value.busy).length > 0 : this.max > this.getSize();
+
+    const obj = {
+      size: this.getSize(),
+      maxSize: this.max,
+      hasFreeWorker: hasFreeWorker,
+      queueSize: queue.getSize(),
+      queueMaxSize: this.queueMax,
+      workers: workersState
+    };
+
+    return obj;
+  };
 }
 
-module.exports = function createPool (opts) {
-  return new Pool(opts);
+function createPool (opts) {
+  const usePanel = opts.usePanel || false;
+  const pool = new Pool(opts);
+  if (usePanel) {
+    require("./adm/server").createAdmPanel(pool);
+  }
+  return pool;
+}
+
+module.exports = {
+  createPool
 };

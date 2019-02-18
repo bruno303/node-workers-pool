@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nodemon --experimental-worker ./test/server.js",
-    "lint": "npx eslint ."
+    "lint": "./node_modules/.bin/eslint ."
   },
   "keywords": [
     "thread",
@@ -29,7 +29,9 @@
     "email": "brunooliveira812@gmail.com"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "pug": "^2.0.3"
+  },
   "devDependencies": {
     "eslint": "^5.12.1",
     "eslint-config-standard": "^12.0.0",

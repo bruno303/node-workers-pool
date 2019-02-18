@@ -3,11 +3,11 @@
 const port = 3000;
 const express = require("express");
 const app = express();
-const log = require("./logger.js")(true);
+const log = require("../src/logger.js")(true);
 
 /* Create a pool */
 const Pool = require("../src/Pool.js");
-const pool = new Pool({ max: 3, queueMax: 50 });
+const pool = Pool.createPool({ max: 10, queueMax: 50, usePanel: true });
 
 /* Function example 1 */
 function funcSum (num) {
@@ -139,5 +139,5 @@ app.route("/syncmultip/:num/:num2/:num3")
   });
 
 app.listen(port, () => {
-  log.registerLogExec(`Executing in: http://127.0.0.1:${port}.`);
+  log.registerLogExec(`Test project running in: http://127.0.0.1:${port}.`);
 });
