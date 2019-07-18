@@ -6,7 +6,7 @@ function Worker (queue, callbackExit) {
   this.queue = queue;
 
   /* Internal worker thread */
-  const _worker = new workerThreads.Worker(`${__dirname}\\workerThreadExecutor.js`);
+  const _worker = new workerThreads.Worker(`${__dirname}/workerThreadExecutor.js`);
   this.busy = false;
   this.callback = null;
 
