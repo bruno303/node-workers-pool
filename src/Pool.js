@@ -79,7 +79,14 @@ function Pool (opts) {
 
   this.getState = function () {
     const workersState = workers.getState();
-    const hasFreeWorker = workersState.length > 0 ? workersState.filter(value => !value.busy).length > 0 : this.max > this.getSize();
+    let hasFreeWorker = true;
+
+    if (workersState.length > 0) {
+      const qtdWorkers = workersState.filter(value => !value.busy).length;
+      if (qtdWorkers <= 0) {
+        hasFreeWorker = this.max > this.getSize();
+      }
+    }
 
     const obj = {
       size: this.getSize(),
@@ -92,6 +99,7 @@ function Pool (opts) {
 
     return obj;
   };
+
 }
 
 function createPool (opts) {

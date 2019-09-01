@@ -23,7 +23,7 @@ function initApp () {
 							Size
 						</th>
 						<th class="text-center">
-							Max Size Workers
+							Max Workers Size
 						</th>
 						<th class="text-center">
 							Has Free Worker ?
@@ -32,7 +32,7 @@ function initApp () {
 							Queue Size
 						</th>
 						<th class="text-center">
-							Max Size Queue
+							Max Queue Size
 						</th>
 					</tr>
 				</thead>
@@ -102,7 +102,7 @@ function refreshScreen (data) {
 		let method = worker.method;
 
 		if (method.length > 15) {
-			method = `<a data-toggle="modal" data-target="#modalFunction">${worker.method.substring(0, 15)}</a>`;
+			method = `<a data-toggle="modal" href="" onclick="exibirModal(${worker.threadId})">${worker.method.substring(0, 15)}</a>`;
 		}
 
     html += `<tr>
@@ -194,4 +194,21 @@ function addModalHtml() {
 	`;
 
 	divContent.innerHTML += html;
+}
+
+function exibirModal(method) {
+	$.ajax({
+    url: "/refresh",
+    method: "get",
+    error (err) {
+      alert(JSON.stringify(err));
+    },
+    success (data) {
+			const worker = data.workers.filter(w => w.threadId === method);
+			if (worker.length > 0) {
+				document.querySelector("#modalFunctionBody").innerHTML = worker[0].method;
+				$("#modalFunction").modal();
+			}
+    }
+	});
 }
