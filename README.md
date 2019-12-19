@@ -28,13 +28,13 @@ With this package you can:
 ```
 const pool1 = require('node-workers-pool')({
     max: 10,
-    maxQueue: 40
+    queueMax: 40
 });
 
 --or
 
 const Pool = require('node-workers-pool');
-const pool2 = Pool({ max: 10, maxQueue: 40 });
+const pool2 = Pool({ max: 10, queueMax: 40 });
 ```
 
 * If options is missing, the max number of workers will be the core's number of the machine (require('os').cpus().length).
@@ -103,7 +103,7 @@ const pool = new Pool(); // without opts
 
 /** This pool will have:
 * max = require('os').cpus().length
-* maxQueue = 10
+* queueMax = 10
 */
 ```
 
