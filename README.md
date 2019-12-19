@@ -1,20 +1,22 @@
 # node-workers-pool
 Easy way to manage a pool of worker threads.
 
-Use the **--experimental-worker** flag to run correctly, since this resource still experimental in NodeJs.
+In Nodejs v12.14 **LTS** or later, the **--experimental-worker** flag is not necessary anymore, since this resource become stable.
+
+In Nodejs up to 11.x, use the **--experimental-worker** flag to run correctly, since this resource still experimental.
 
 ## Introduction
 
 With this package you can:
 * Run heavy cpu-bound in a pool of worker_threads, an experimental resouce in NodeJs.
 * Control the number of active workers in the pool.
-* Create a queue, because when all the workers are busy, the processing will be queued.
+* Create a queue, because when all the workers are busy, new processing requests will be queued.
 * Easily clear the pool (workers and queue).
 * Easily capture the result or error from the workers, since the pool uses Promise.
 
 ### Prerequisites
 
-* [NodeJs](https://nodejs.org/en/) (v 10.15.0 or later)
+* [NodeJs](https://nodejs.org/en/) (v 12.x or later for stable / v 10.15.0 up to v 11.x for experimental)
 * [Npm](https://www.npmjs.com/)
 
 ### DEV - Prerequisites
@@ -101,9 +103,9 @@ pool.enqueue(() => 'Executed') // Function and parameters
 const Pool = require('node-workers-pool');
 const pool = new Pool(); // without opts
 
-/** This pool will have:
-* max = require('os').cpus().length
-* queueMax = 10
+/** This pool will be configured by default with:
+*   max = require('os').cpus().length
+*   queueMax = 10
 */
 ```
 
@@ -143,7 +145,7 @@ http://127.0.0.1:3000/asyncfibo/5
 * Case the pool and queue are full, an error 'full' will be thrown.
 * The workers will be allocated as needed, so just create a pool will not create all workers at same time.
 
-Click [here](https://nodejs.org/docs/latest-v11.x/api/worker_threads.html) to read more about **worker_threads**.
+Click [here](https://nodejs.org/docs/latest-v12.x/api/worker_threads.html) to read more about **worker_threads**.
 
 ## Author
 
